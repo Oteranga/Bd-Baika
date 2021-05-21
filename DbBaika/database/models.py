@@ -6,13 +6,16 @@ from django.db import models
 class Persona(models.Model):
     id_persona = models.CharField(max_length = 8, blank = True, null = False, primary_key = True)
     dni = models.CharField(max_length = 9, blank = False, null = False)
-    nombres = models.CharField(max_length = 255, blank = False, null = False)
+    nombre = models.CharField(max_length = 255, blank = False, null = False)
     apellidos = models.CharField(max_length = 255, blank = False, null = False)
     celular = models.CharField(max_length = 12, blank = False, null = False)
     sexo = models.CharField(max_length = 1, blank = True, null = True)
     f_nacimiento = models.DateField(blank = True, null = True)
     correo = models.CharField(max_length = 255, blank = False, null = False)
     activo = models.BooleanField(blank = True, null = True)
+
+    def __str__(self):
+        return self.nombre
 
 class Colegio(models.Model):
     id_colegio = models.CharField(max_length = 10, blank = True, null = False, primary_key = True)
@@ -22,11 +25,17 @@ class Colegio(models.Model):
     distrito = models.CharField(max_length = 255, blank = False, null = False)
     direccion = models.CharField(max_length = 255, blank = False, null = False) 
 
+    def __str__(self):
+        return self.nombre
+
 class Beneficiario(models.Model):
     id_beneficiario = models.ForeignKey(Persona, on_delete = models.CASCADE)
     estatura = models.FloatField(blank = False, null = False)
     tiempo_caminata = models.FloatField(blank = False, null = False)
     id_colegio = models.ForeignKey(Colegio, on_delete =  models.CASCADE)
+
+    def __str__(self):
+        return self.id_beneficiario.nombre
 
 class Director(models.Model):
     id_director = models.ForeignKey(Persona, on_delete = models.CASCADE)
@@ -34,8 +43,14 @@ class Director(models.Model):
 class Voluntario_entrega(models.Model):
     id_voluntario_entrega = models.ForeignKey(Persona, on_delete = models.CASCADE)
 
+    def __str__(self):
+        return self.id_voluntario_entrega.nombre
+
 class Embajador(models.Model):
     id_embajador = models.ForeignKey(Persona, on_delete =  models.CASCADE)
+
+    def __str__(self):
+        return self.id_embajador.nombre
 
 class Responsable_acopio(models.Model):
     id_responsable_acopio = models.ForeignKey(Persona, on_delete = models.CASCADE)
@@ -58,14 +73,14 @@ class Socio(models.Model):
     monto = models.FloatField(blank = False, null = False)
 
 class Viaje(models.Model):
-    id = models.CharField(max_length = 8, blank = True, null =  False, primary_key = true)
+    id = models.CharField(max_length = 8, blank = True, null =  False, primary_key = True)
     costo = models.FloatField(blank = False, null = False)
     tipo_carga = models.CharField(max_length = 100, blank = False, null =  False)
     ruc_trans = models.CharField(max_length = 10, blank =  False, null =  False)
 
 class Entrega(models.Model):
     id_viaje = models.ForeignKey(Viaje, on_delete = models.CASCADE)
-    id = models.CharField(max_length = 8, blank = True, null = False, primary_key = true)
+    id = models.CharField(max_length = 8, blank = True, null = False, primary_key = True)
     fecha = models.DateField(blank = False, null = False)
     id_colegio = models.ForeignKey(Colegio, on_delete = models.CASCADE)
 
@@ -78,7 +93,7 @@ class Transportista(models.Model):
     interprovincial = models.BooleanField(blank = False, null = False)
 
 class Punto_acopio(models.Model):
-    id = models.CharField(max_length = 8, blank = True, null = False, primary_key = true)
+    id = models.CharField(max_length = 8, blank = True, null = False, primary_key = True)
     nombre = models.CharField(max_length = 50, blank = False, null =  False)
     departamento = models.CharField(max_length = 50, blank = False, null = False)
     provincia = models.CharField(max_length = 50, blank = False, null = False)
@@ -86,7 +101,7 @@ class Punto_acopio(models.Model):
     direccion =  models.CharField(max_length = 50, blank = False, null = False)
 
 class Bicicleta(models.Model):
-    id = models.CharField(max_length = 8, blank = True, null = False)
+    id_bici = models.CharField(max_length = 8, blank = True, null = False)
     marca = models.CharField(max_length = 50, blank = False, null = False)
     tipo = models.CharField(max_length = 50, blank = False, null = False)
     tamano_aro = models.IntegerField(blank = False, null = False)
@@ -97,7 +112,7 @@ class Bicicleta(models.Model):
     id_viaje = models.ForeignKey(Viaje, on_delete = models.CASCADE)
     id_entrega = models.ForeignKey(Entrega, on_delete = models.CASCADE)
     id_punto_acopio = models.ForeignKey(Punto_acopio, on_delete = models.CASCADE)
-    id_donante = models.ForeignKey(Donante, on_delete = models.CASACADE)
+    id_donante = models.ForeignKey(Donante, on_delete = models.CASCADE)
 
 class Herramienta(models.Model):
     id = models.CharField(max_length = 8, blank = True, null = False, primary_key = True)
@@ -105,7 +120,7 @@ class Herramienta(models.Model):
     cantidad = models.IntegerField(blank = False, null = False)
 
 class Mantenimiento(models.Model):
-    id =  models.CharField(max_length = 8, blank = True, null = False)
+    id_man =  models.CharField(max_length = 8, blank = True, null = False)
     fecha = models.DateField(blank = False, null = False)
 
 #Relaciones
