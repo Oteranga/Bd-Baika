@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="esp">
+    <head>
+        <title>Data display</title>
+    </head>
+    <body>
+        <h1>Data:</h1>
+        {% for person in people_list %}
+        <strong>{{ person }}</strong>
+        <ul>
+            <li>{{ person.celular }}</li>
+            <li>{{ person.sexo }}</li>
+            <li>{{ person.f_nacimiento }}</li>
+            <li>{{ person.correo }}</li>
+            <li>{{ person.activo }}</li>
+        </ul>
+        <br>
+        {% endfor %}
+    </body>
+</html>

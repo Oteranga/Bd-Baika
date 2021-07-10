@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Forms de prueba</title>
+    </head>
+    <body>
+        <h1>Forms de prueba para agregar personas</h1>
+
+        {% if submitted %}
+            The person was added succesfully!
+        {% else %}
+            <form method="POST" action="">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <input type="submit" value="submit">
+            </form>
+        {% endif %}
+    </body>
+</html>

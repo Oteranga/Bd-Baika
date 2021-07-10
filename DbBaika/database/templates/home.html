@@ -5,5 +5,23 @@
     </head>
     <body>
         <h1>Baika</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="nombre">Ingresar DNI</label>
+            <input type="text" id="dni" name="dni"><br>
+            <label for="nombre">Ingresar nombre</label>
+            <input type="text" id="nombre_embajador" name="nombre_embajador"><br>
+            <label for="nombre">Ingresar apellidos</label>
+            <input type="text" id="apellido" name="apellido"><br>
+            <label for="nombre">Ingresar celular</label>
+            <input type="text" id="numero_celular" name="numero_celular"><br>
+            <label for="nombre">Ingresar sexo</label>
+            <input type="text" id="sexo" name="sexo"><br>
+            <label for="nombre">Ingresar fecha nacimiento</label>
+            <input type="text" id="nacimiento" name="nacimiento"><br>
+            <label for="nombre">Ingresar mail</label>
+            <input type="text" id="correo" name="correo"><br>
+            <input type="submit" value="submit">
+        </form>
     </body>
 </html>

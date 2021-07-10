@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="esp">
+    <head>
+        <title>Data display</title>
+    </head>
+    <body>
+        <h1>Personas en la base de datos</h1>
+        <br>
+        {% for person in people_list %}
+            <a href="{% url 'show-person' person.id %}">{{ person }}</a>
+            <p align="right">
+                <a href="{% url 'update-person' person.id %}" class="btn btn-outline-secondary btn-small">Update</a>
+            </p>
+            <br>
+            <p>
+                <a href="{% url 'delete-person' person.id %}" class="btn btn-outline-danger btn-small">Delete</a>
+            </p>
+        {% endfor %}
+    </body>
+</html>
